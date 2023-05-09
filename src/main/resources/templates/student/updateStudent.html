@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<div style="text-align: center">
+  <form th:action="@{/students/{id}(id=${student.id})}"
+        th:method="Get"
+        th:object="${student}">
+
+    <input th:text="text" th:field="*{firstName}" placeholder="Firs name">
+    <br>
+    <br>
+    <input th:text="text" th:field="*{email}" placeholder="Email">
+    <br>
+    <br>
+    <input th:text="text" th:field="*{lastName}" placeholder="Last name">
+    <br>
+    <br>
+    <select th:field="*{groupId}">
+      <option th:each="group:${groupList}"
+              th:value="${group.id}"
+              th:text="${group.groupName}">
+      </option>
+    </select>
+    <input type="submit" value="update">
+  </form>
+</div>
+
+</body>
+</html>

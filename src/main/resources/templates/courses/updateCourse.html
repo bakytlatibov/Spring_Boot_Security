@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div style="text-align: center">
+    <form th:action="@{/courses/{id}(id=${updateCourse.id})}"
+          th:method="Get"
+          th:object="${updateCourse}">
+
+        <input th:text="text" th:field="*{courseName}" placeholder="course name">
+        <br>
+        <br>
+        <input th:text="text" th:field="*{durationMonth}" placeholder="duration month">
+        <br>
+        <br>
+        <select th:field="*{companyId}">
+            <option th:each="company:${companyList}"
+                    th:value="${company.id}"
+                    th:text="${company.companyName}">
+            </option>
+        </select>
+        <input type="submit" value="update">
+    </form>
+</div>
+
+</body>
+</html>

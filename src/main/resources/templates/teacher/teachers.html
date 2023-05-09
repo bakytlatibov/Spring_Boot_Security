@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ru">
+<link rel="stylesheet" href="./style.css">
+
+
+
+<style>
+    body{
+        height:100vh;
+        background-color: #4158D0;
+        background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+    }
+    table {
+        width: 850px;
+        border-collapse: collapse;
+        margin:50px auto;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        border-radius: 12px;
+
+    }
+    th {
+        background: #152147;
+        color: white;
+        font-weight: bold;
+        border-bottom:2px solid#4158D0 ;
+    }
+
+    td, th {
+        padding: 30px 10px;
+        text-align: left;
+        font-size: 18px;
+        text-align: center;
+    }
+    td{
+        background-color: #12192c;
+        color:#fff;
+    }
+    @media
+    only screen and (max-width: 760px),
+    (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+        table {
+            width: 100%;
+        }
+        table, thead, tbody, th, td, tr {
+            display: block;
+        }
+        thead tr {
+            position: absolute;
+            top: -9999px;
+            left: -9999px;
+        }
+
+        tr { border: 1px solid #ccc; }
+
+        td {
+            border: none;
+            border-bottom: 1px solid #eee;
+            position: relative;
+            padding-left: 50%;
+
+        }
+
+        td:before {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 45%;
+            padding-right: 10px;
+            white-space: nowrap;
+            content: attr(data-column);
+            color: #000;
+            font-weight: bold;
+        }
+
+    }
+    .credit a{
+        text-decoration: none;
+        color: #fff;
+        font-weight: 800;
+    }
+
+    .credit {
+        font-family: Verdana, Geneva, Tahoma, sans-serif;
+        margin: 10px;
+        color:#fff;
+        text-align: center;
+    }
+
+</style>
+<body>
+
+<table style="width:60%">
+    <tr>
+        <td>#</td>
+        <td>Firs Name</td>
+        <td>Email</td>
+        <td>Last Name</td>
+        <td>update</td>
+        <td>delete</td>
+    </tr>
+    <tr>
+    <tr th:each="teacher:${teachers}">
+        <th th:text="${teacher.id}"></th>
+        <th th:text="${teacher.firstName}"></th>
+        <th th:text="${teacher.lastName}"></th>
+        <th th:text="${teacher.email}"></th>
+        <td>
+            <a th:href="@{/teachers/update/{id}(id=${teacher.id})}">
+                <button style="height:auto; background-color: #8b8900">update</button>
+            </a>
+        </td>
+        <td>
+            <form th:method="Delete" th:action="@{/teachers/delete(id=${teacher.id})}">
+                <button type="submit" style="height:auto; background-color: #82008b">delete</button>
+            </form>
+        </td>
+    </tr>
+</table>
+<form>
+    <input style=" display: block; margin:auto; font-size:15px;" class="b1" type="button" value="Add Teacher"
+           onclick="window.location.href = 'teachers/addTeacher'">
+</form>
+</body>
+</html>
