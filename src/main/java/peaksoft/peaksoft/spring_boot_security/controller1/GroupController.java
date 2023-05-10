@@ -2,6 +2,7 @@ package peaksoft.peaksoft.spring_boot_security.controller1;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import peaksoft.peaksoft.spring_boot_security.entities.Course;
@@ -68,8 +69,8 @@ public class GroupController {
 
     }
 
-    @RequestMapping(value = "/delete",method = {RequestMethod.DELETE,RequestMethod.GET})
-    public String deleteGroup(@RequestParam("id") Long id) {
+    @RequestMapping(value = "/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+    public String deleteGroup(@PathVariable("id") Long id) {
         Group group = groupService.getGroupById(id);
         groupService.deleteGroup(group);
         return "redirect:/groups";

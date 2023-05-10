@@ -56,8 +56,8 @@ public class StudentController {
         service.updateStudent(student.getGroupId(), id, student);
         return "redirect:/students";
     }
-    @RequestMapping(value = "/delete",method = {RequestMethod.DELETE,RequestMethod.GET})
-    public String deleteStudent(@RequestParam("id") Long id) {
+    @RequestMapping(value = "/delete/{id}",method = {RequestMethod.DELETE,RequestMethod.GET})
+    public String deleteStudent(@PathVariable("id") Long id) {
       Student student=service.getStudentById(id);
       service.deleteStudent(student);
         return "redirect:/students";

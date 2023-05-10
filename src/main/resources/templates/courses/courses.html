@@ -1,33 +1,32 @@
-
-
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Pure CSS Responsive Table || Learningrobo</title>
     <link rel="stylesheet" href="./style.css">
 
 
-
     <style>
-        body{
-            height:100vh;
+        body {
+            height: 100vh;
             background-color: #4158D0;
             background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
         }
+
         table {
             width: 850px;
             border-collapse: collapse;
-            margin:50px auto;
+            margin: 50px auto;
             box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
             border-radius: 12px;
 
         }
+
         th {
             background: #152147;
             color: white;
             font-weight: bold;
-            border-bottom:2px solid#4158D0 ;
+            border-bottom: 2px solid #4158D0;
         }
 
         td, th {
@@ -36,27 +35,32 @@
             font-size: 18px;
             text-align: center;
         }
-        td{
+
+        td {
             background-color: #12192c;
-            color:#fff;
+            color: #fff;
         }
-        @media
-        only screen and (max-width: 760px),
-        (min-device-width: 768px) and (max-device-width: 1024px)  {
+
+        @media only screen and (max-width: 760px),
+        (min-device-width: 768px) and (max-device-width: 1024px) {
 
             table {
                 width: 100%;
             }
+
             table, thead, tbody, th, td, tr {
                 display: block;
             }
+
             thead tr {
                 position: absolute;
                 top: -9999px;
                 left: -9999px;
             }
 
-            tr { border: 1px solid #ccc; }
+            tr {
+                border: 1px solid #ccc;
+            }
 
             td {
                 border: none;
@@ -79,7 +83,8 @@
             }
 
         }
-        .credit a{
+
+        .credit a {
             text-decoration: none;
             color: #fff;
             font-weight: 800;
@@ -88,7 +93,7 @@
         .credit {
             font-family: Verdana, Geneva, Tahoma, sans-serif;
             margin: 10px;
-            color:#fff;
+            color: #fff;
             text-align: center;
         }
 
@@ -100,48 +105,51 @@
 <table>
     <table style="width:60%">
 
-      <th scope="col">#</th>
-      <th scope="col">Course Name</th>
-      <th scope="col">Duration Month</th>
-      <th scope="col">update</th>
-      <th scope="col">delete</th>
-      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Course Name</th>
+        <th scope="col">Duration Month</th>
+        <th scope="col">update</th>
+        <th scope="col">delete</th>
+        <tr>
 
-      </tr>
+        </tr>
 
-      <tr th:each="course:${courses}">
+        <tr th:each="course:${courses}">
 
-        <td th:text="${course.id}"></td>
-        <td th:text="${course.courseName}"></td>
-        <td th:text="${course.durationMonth}"></td>
+            <td th:text="${course.id}"></td>
+            <td th:text="${course.courseName}"></td>
+            <td th:text="${course.durationMonth}"></td>
 
-        <td>
-          <a
-                th:href="@{/courses/update/{id}(id=${course.id})}">
-          <button style="height: auto; background-color: white">update</button>
-        </a>
-        </td>
-        <td>
-          <form th:method="Get" th:action="@{/courses/delete(id=${course.id})}">
-            <button type="submit " style="height:auto; background-color: wheat">delete</button>
-          </form>
-        </td>
-      </tr>
+            <td>
+                <a
+                        th:href="@{/courses/update/{id}(id=${course.id})}">
+                    <button style="height: auto; background-color: white">update</button>
+                </a>
+            </td>
+            <td>
+                <form th:method="Get" th:action="@{/courses/delete/{id}(id=${course.id})}">
+                    <button type="submit " style="height:auto; background-color: white">delete</button>
+                </form>
+            </td>
+
+            <!--        <td>-->
+            <!--          <form th:method="post" th:action="@{/courses/delete/{id}(id=${course.id})}">-->
+            <!--            <button type="submit " style="height:auto; background-color: wheat">delete</button>-->
+            <!--          </form>-->
+            <!--        </td>-->
+        </tr>
 
 
-</table>ta
+    </table>
+    ta
 </table>
 <form>
-  <input style=" display: block; margin:auto; font-size:15px;" class="b1" type="button"
-         value="Add Course" onclick="window.location.href = '/courses/addCourse'">
+    <input style=" display: block; margin:auto; font-size:15px;" class="b1" type="button"
+           value="Add Course" onclick="window.location.href = '/courses/addCourse'">
 </form>
 
 </body>
 </html>
-
-
-
-
 
 
 <!--<!DOCTYPE html>-->

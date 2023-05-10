@@ -1,6 +1,7 @@
 package peaksoft.peaksoft.spring_boot_security.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import peaksoft.peaksoft.spring_boot_security.entities.Course;
 import peaksoft.peaksoft.spring_boot_security.entities.Teacher;
@@ -12,7 +13,9 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class TeacherService {
+    @Autowired
     private final TeacherRepository teacherRepository;
+    @Autowired
     private final CourseRepository courseRepository;
 
 

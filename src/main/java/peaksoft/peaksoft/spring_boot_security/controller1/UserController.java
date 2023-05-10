@@ -24,7 +24,7 @@ public class UserController {
     @GetMapping("/addUser")
     public String addUser(Model model){
         model.addAttribute("user",new User());
-        return "user/saveUser";
+        return "user/addUser";
     }
     @PostMapping("/saveUser")
     public String saveUser(@ModelAttribute("user")User user){
@@ -35,15 +35,15 @@ public class UserController {
     public String updateUser(@PathVariable("id")Long id,Model model){
         User user = userRepository.getById(id);
         model.addAttribute("updateUser",user);
-        return "user/userUpdate";
+        return "user/updateUser";
     }
     @PatchMapping("/{id}")
     public String saveUserUpdate(@PathVariable("id")Long id,@ModelAttribute("updateUser")User user){
       userRepository.save(user);
         return "redirect:/user/users";
     }
-    @PostMapping("/delete")
-    public String deleteUser(@RequestParam("id")Long id){
+    @PostMapping("/delete/{id}")
+    public String deleteUser(@PathVariable("id")Long id){
         User user = userRepository.getById(id);
         userRepository.delete(user);
         return "redirect:/user/users";

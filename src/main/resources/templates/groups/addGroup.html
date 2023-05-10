@@ -19,7 +19,7 @@
         height: 100vh;
         width: 100%;
         background: #0f2027; /* fallback for old browsers */
-        background: linear-gradient(to right,#2c5364, #203a43, #0f2027);
+        background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
         display: flex;
         justify-content: center;
         align-items: flex-start;
@@ -58,6 +58,7 @@
         -webkit-transform: translateY(-4rem);
         transform: translateY(-4rem);
     }
+
     html, body {
         height: 100%;
     }
@@ -79,10 +80,10 @@
         font-weight: 700;
         color: #313133;
         background: #4FD1C5;
-        background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
+        background: linear-gradient(90deg, rgba(129, 230, 217, 1) 0%, rgba(79, 209, 197, 1) 100%);
         border: none;
         border-radius: 1000px;
-        box-shadow: 12px 12px 24px rgba(79,209,197,.64);
+        box-shadow: 12px 12px 24px rgba(79, 209, 197, .64);
         transition: all 0.3s ease-in-out 0s;
         cursor: pointer;
         outline: none;
@@ -96,7 +97,7 @@
         min-width: calc(300px + 12px);
         min-height: calc(60px + 12px);
         border: 6px solid #00FFCB;
-        box-shadow: 0 0 60px rgba(0,255,203,.64);
+        box-shadow: 0 0 60px rgba(0, 255, 203, .64);
         position: absolute;
         top: 50%;
         left: 50%;
@@ -116,7 +117,8 @@
 
     button::after {
         content: '';
-        width: 30px; height: 30px;
+        width: 30px;
+        height: 30px;
         border-radius: 100%;
         border: 6px solid #00FFCB;
         position: absolute;
@@ -142,7 +144,9 @@
             width: 300px;
             height: 300px;
             opacity: 0;
-        }}
+        }
+    }
+
     .middle {
         position: absolute;
         top: 30%;
@@ -225,23 +229,26 @@
           th:object="${group}">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <div class="form__group">
-            <input type="text" class="form__input" th:field="*{groupName}" id="groupName"  placeholder="group name" required="" />
+            <input type="text" class="form__input" th:field="*{groupName}" id="groupName" placeholder="group name"
+                   required=""/>
             <label for="groupName" class="form__label"> Group Name</label>
             <br>
             <br>
-            <input type="text" class="form__input" th:field="*{dateOfStart}" id="date of start"  placeholder="date of start" required="" />
+            <input type="text" class="form__input" th:field="*{dateOfStart}" id="date of start"
+                   placeholder="date of start" required=""/>
             <label for="date of start" class="form__label">Date of Start</label>
             <br>
             <br>
-            <input type="text" class="form__input" th:field="*{dateOfFinish}" id="date of finish"  placeholder="date of finish" required="" />
+            <input type="text" class="form__input" th:field="*{dateOfFinish}" id="date of finish"
+                   placeholder="date of finish" required=""/>
             <label for="date of finish" class="form__label">Date of Finish</label>
             <br>
             <select th:field="*{courseId}">-->
-                            <option th:each="course:${courseList}"
-                                    th:value="${course.id}"
-                                    th:text="${course.courseName}">
-                            </option>
-                        </select>
+                <option th:each="course:${courseList}"
+                        th:value="${course.id}"
+                        th:text="${course.courseName}">
+                </option>
+            </select>
 
             <div class="wrap">
                 <button class="button">add Group</button>
@@ -256,7 +263,6 @@
                     <a href="/" class="btn btn4">Home</a>
 
 
-
                 </div>
             </div>
         </div>
@@ -269,7 +275,7 @@
         <!--        <br>-->
         <!--        <br>-->
     </form>
-    </div>
+</div>
 </div>
 
 

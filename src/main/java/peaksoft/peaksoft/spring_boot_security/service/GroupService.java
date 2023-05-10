@@ -1,6 +1,7 @@
 package peaksoft.peaksoft.spring_boot_security.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import peaksoft.peaksoft.spring_boot_security.entities.Course;
 import peaksoft.peaksoft.spring_boot_security.entities.Group;
@@ -14,7 +15,9 @@ import java.util.List;
 @RequiredArgsConstructor
 
 public class GroupService {
+    @Autowired
     private final GroupRepository groupRepository;
+    @Autowired
     private final CourseRepository courseRepository;
     public List<Group> getAllGroups() {
         return groupRepository.findAll();

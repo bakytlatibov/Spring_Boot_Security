@@ -55,14 +55,14 @@ public class TeacherController {
 
     }
 
-    @RequestMapping(value = "{id}",method = )
+    @RequestMapping(value = "{id}",method = {RequestMethod.PATCH,RequestMethod.GET})
     public String saveUpdateTeacher(@PathVariable("id") Long id, @ModelAttribute("teacher") Teacher teacher) {
         teacherService.updateTeacher(id, teacher.getCourseId(), teacher);
         return "redirect:/teachers";
     }
 
-    @DeleteMapping("/delete")
-    public String deleteTeacher(@RequestParam("id") Long id) {
+    @RequestMapping(value = "/delete/{id}",method = {RequestMethod.DELETE,RequestMethod.GET})
+    public String deleteTeacher(@PathVariable("id") Long id) {
         Teacher teacher = teacherService.getTeacherById(id);
         teacherService.deleteTeacher(teacher);
         return "redirect:/teachers";

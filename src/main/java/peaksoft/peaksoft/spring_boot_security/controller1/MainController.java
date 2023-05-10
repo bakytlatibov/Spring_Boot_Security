@@ -12,11 +12,11 @@ public class MainController {
 //        return "login";
 //    }
 
-    @GetMapping()
-    public String getMainPage() {
-        return "main_page";
-    }
- @GetMapping("/main")
+//    @GetMapping()
+//    public String getMainPage() {
+//        return "main_page";
+//    }
+ @GetMapping()
     public String getMainPage2() {
         return "main";
     }

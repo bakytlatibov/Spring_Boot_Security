@@ -64,8 +64,8 @@ public class CourseController {
         return "redirect:/courses";
     }
 
-    @RequestMapping(value = "/delete",method = {RequestMethod.DELETE,RequestMethod.GET})
-    public String deleteCourse(@RequestParam("id") Long id) {
+    @RequestMapping(value = "/delete/{id}",method = {RequestMethod.DELETE,RequestMethod.GET})
+    public String deleteCourse(@PathVariable("id") Long id) {
         Course course1 = courseService.getCurseById(id);
         courseService.deleteCourse(course1);
         return "redirect:/courses";

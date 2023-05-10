@@ -19,7 +19,7 @@
         height: 100vh;
         width: 100%;
         background: #0f2027; /* fallback for old browsers */
-        background: linear-gradient(to right,#2c5364, #203a43, #0f2027);
+        background: linear-gradient(to right, #2c5364, #203a43, #0f2027);
         display: flex;
         justify-content: center;
         align-items: flex-start;
@@ -58,6 +58,7 @@
         -webkit-transform: translateY(-4rem);
         transform: translateY(-4rem);
     }
+
     html, body {
         height: 100%;
     }
@@ -79,10 +80,10 @@
         font-weight: 700;
         color: #313133;
         background: #4FD1C5;
-        background: linear-gradient(90deg, rgba(129,230,217,1) 0%, rgba(79,209,197,1) 100%);
+        background: linear-gradient(90deg, rgba(129, 230, 217, 1) 0%, rgba(79, 209, 197, 1) 100%);
         border: none;
         border-radius: 1000px;
-        box-shadow: 12px 12px 24px rgba(79,209,197,.64);
+        box-shadow: 12px 12px 24px rgba(79, 209, 197, .64);
         transition: all 0.3s ease-in-out 0s;
         cursor: pointer;
         outline: none;
@@ -96,7 +97,7 @@
         min-width: calc(300px + 12px);
         min-height: calc(60px + 12px);
         border: 6px solid #00FFCB;
-        box-shadow: 0 0 60px rgba(0,255,203,.64);
+        box-shadow: 0 0 60px rgba(0, 255, 203, .64);
         position: absolute;
         top: 50%;
         left: 50%;
@@ -116,7 +117,8 @@
 
     button::after {
         content: '';
-        width: 30px; height: 30px;
+        width: 30px;
+        height: 30px;
         border-radius: 100%;
         border: 6px solid #00FFCB;
         position: absolute;
@@ -142,7 +144,9 @@
             width: 300px;
             height: 300px;
             opacity: 0;
-        }}
+        }
+    }
+
     .middle {
         position: absolute;
         top: 30%;
@@ -225,40 +229,41 @@
           th:object="${company}">
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <div class="form__group">
-            <input type="text" class="form__input" th:field="*{companyName}" id="companyName"  placeholder="company name" required="" />
+            <input type="text" class="form__input" th:field="*{companyName}" id="companyName" placeholder="company name"
+                   required=""/>
             <label for="companyName" class="form__label"> Company name</label>
             <br>
             <br>
-            <input type="text" class="form__input" th:field="*{locatedCountry}" id="locatedCountry"  placeholder="located contry" required="" />
+            <input type="text" class="form__input" th:field="*{locatedCountry}" id="locatedCountry"
+                   placeholder="located contry" required=""/>
             <label for="locatedCountry" class="form__label">Located country</label>
             <br>
             <br>
 
-        <div class="wrap">
-            <button class="button">add Company</button>
-            <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+            <div class="wrap">
+                <button class="button">add Company</button>
+                <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 
-            <div class="middle">
-                <a href="/companies" class="btn btn1">Company</a>
-                <a href="/courses" class="btn btn2">Course</a>
-                <a href="/groups" class="btn btn3">Group</a>
-                <a href="/teachers" class="btn btn4">Teacher</a>
-                <a href="/students" class="btn btn4">Student</a>
-                <a href="/" class="btn btn4">Home</a>
+                <div class="middle">
+                    <a href="/companies" class="btn btn1">Company</a>
+                    <a href="/courses" class="btn btn2">Course</a>
+                    <a href="/groups" class="btn btn3">Group</a>
+                    <a href="/teachers" class="btn btn4">Teacher</a>
+                    <a href="/students" class="btn btn4">Student</a>
+                    <a href="/" class="btn btn4">Home</a>
 
 
-
+                </div>
             </div>
         </div>
-        </div>
 
 
-<!--        <input th:text type="text" th:field="*{companyName}" placeholder="company name">-->
-<!--        <br>-->
-<!--        <br>-->
-<!--        <input th:text type="text" th:field="*{locatedCountry}" placeholder="located country">-->
-<!--        <br>-->
-<!--        <br>-->
+        <!--        <input th:text type="text" th:field="*{companyName}" placeholder="company name">-->
+        <!--        <br>-->
+        <!--        <br>-->
+        <!--        <input th:text type="text" th:field="*{locatedCountry}" placeholder="located country">-->
+        <!--        <br>-->
+        <!--        <br>-->
     </form>
 </div>
 </div>

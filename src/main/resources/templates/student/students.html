@@ -112,7 +112,7 @@
       </a>
     </td>
     <td>
-      <form th:method="Delete" th:action="@{/students/delete(id=${student.id})}">
+      <form th:method="Get" th:action="@{/students/delete/{id}(id=${student.id})}">
         <button type="submit" style="height:auto; background-color: #82008b">delete</button>
       </form>
     </td>
