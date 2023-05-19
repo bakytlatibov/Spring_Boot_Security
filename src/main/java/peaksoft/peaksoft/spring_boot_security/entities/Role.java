@@ -1,4 +1,4 @@
-package peaksoft.peaksoft.spring_boot_security.entity;
+package peaksoft.peaksoft.spring_boot_security.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

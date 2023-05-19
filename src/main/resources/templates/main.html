@@ -1,24 +1,24 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <title></title>
-    <style>
 
+
+    <style>
         body {
             margin: 0;
             padding: 0;
-            /*background:url("https://www.learnupon.com/wp-content/uploads/@2x-Blog-Choosing-a-LMS-animation.gif");*/
-            /*background:url("https://mintbook.com/assetsNew/img/university.gif");*/
-            background: url("https://www.learnupon.com/wp-content/uploads/00-Featured-What-is-LMS-SEO-blog-animation.gif");
+            background: url(https://bincol.ru/do/pluginfile.php/58515/course/overviewfiles/orig.gif);
             background-size: cover;
 
         }
 
         .middle {
             position: absolute;
-            top: 25%;
-            left: 8%;
+            top: 40%;
+            left: 10%;
             transform: translate(-50%, -50%);
         }
 
@@ -30,7 +30,7 @@
             font-family: "montserrat";
             text-decoration: none;
             margin: 30px 0;
-            border: 2px solid #3209c2;
+            border: 2px solid #375d5d;
             padding: 14px 60px;
             text-transform: uppercase;
             overflow: hidden;
@@ -87,67 +87,220 @@
             height: 380%;
         }
 
+
+
+
+
+
+
+        /* page styling */
+        body {
+            /*background: linear-gradient(90deg, #bd0d0d, #8b059a);*/
+        }
+
+        section {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        section h1 {
+            font-size: 46px;
+            text-align: center;
+        }
+
+        section p {
+            font-size: 26px;
+            text-align: center;
+        }
+
+        /* hamburger */
+        .checkbox {
+            display: none;
+        }
+
+        .button {
+            position: relative;
+            background-color: #ffffff;
+            height: 5rem;
+            width: 5rem;
+            border-radius: 50%;
+            position: fixed;
+            top: 5vh;
+            right: 5vw;
+            z-index: 2000;
+            box-shadow: 0 1rem 3rem black;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .background {
+            height: 4rem;
+            width: 4rem;
+            border-radius: 50%;
+            position: fixed;
+            top: 5.5vh;
+            right: 5.5vw;
+            background-image: radial-gradient(#124b4b, black);
+            z-index: 1000;
+
+            transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+        }
+
+        .nav {
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            right: -60vw;
+            z-index: 1500;
+            opacity: 0;
+            width: 0;
+            transition: all 0.8s;
+        }
+
+        .list {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            list-style: none;
+            text-align: center;
+            width: 100%;
+        }
+
+        .item {
+            margin: 1rem;
+            font-size: 36px;
+        }
+
+        .link:link,
+        .link:visited {
+            display: inline-block;
+            font-size: 3rem;
+            font-weight: 300;
+            padding: 1rem 2rem;
+            color: #699316;
+            text-decoration: none;
+            text-transform: uppercase;
+            /*background-image: linear-gradient(*/
+            /*        120deg,*/
+            /*        transparent 0%,*/
+            /*        transparent 50%,*/
+            /*        white 50%*/
+            );
+            background-size: 220%;
+            transition: all 0.4s;
+        }
+
+        .link:hover,
+        .link:active {
+            color: lightgreen;
+            cursor: pointer;
+        }
+
+        /* functionality */
+        .checkbox:checked ~ .background {
+            transform: scale(80);
+        }
+        .checkbox:checked ~ .nav {
+
+            opacity: 1;
+            width: 100%;
+            right: 0;
+        }
+
+        /*  */
+        /* styling hamb ICON */
+        .icon {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .icon,
+        .icon::before,
+        .icon::after {
+            width: 3rem;
+            height: 2px;
+            background-color: gray;
+            display: inline-block;
+        }
+
+        .icon::before,
+        .icon::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            transition: all 0.2s;
+        }
+
+        .icon::before {
+            top: -0.8rem;
+        }
+        .icon::after {
+            top: 0.8rem;
+        }
+
+        .button:hover icon:before {
+            top: -1rem;
+        }
+        .button:hover icon::after {
+            top: 1rem;
+        }
+
+        .checkbox:checked + .button .icon {
+            background-color: transparent;
+        }
+
+        .checkbox:checked + .button .icon::before {
+
+            top: 0;
+            transform: rotate(135deg);
+        }
+        .checkbox:checked + .button .icon::after {
+
+            top: 0;
+            transform: rotate(-135deg);
+        }
+
     </style>
 </head>
-
+<div>
+    <h1 style="left: 20px;top: 30px; background-color: deepskyblue;">PeAksOfT</h1>
+</div>
 <body>
-<a href="profile">profile</a>
+
+<input type="checkbox" id="navi-toggle" class="checkbox" />
+<label for="navi-toggle" class="button">
+    <span class="icon">&nbsp;</span>
+</label>
+<div class="background">&nbsp;</div>
+
+<nav class="nav">
+    <ul class="list">
+        <li class="item"> <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR','STUDENT')" th:href="@{/profile}" class="link"> Profile </a> </li>
+        <li class="item"> <a href="https://peaksoft.house" class="link"> Peaksoft Hause  </a> </li>
+        <li class="item"> <a  th:href="@{/logout}" class="link"> Logout</a> </li>
+    </ul>
+</nav>
+</body>
+
+
+
 
 
 <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 
 <div class="middle">
-    <a  th:href="@{/companies}" class="btn btn1" >Company</a>
-    <a  th:href="@{/courses}" class="btn btn2">Course</a>
-    <a th:href="@{/groups}" class="btn btn3">Group</a>
-    <a  th:href="@{/teachers}" class="btn btn4">Teacher</a>
-    <a th:href="@{/students}" class="btn btn4">Student</a>
-<!--    sec:authorize="hasAuthority('ADMIN')"-->
+    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/companies}" class="btn btn1">Company</a>
+    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/courses}" class="btn btn2">Course</a>
+    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/groups}" class="btn btn3">Group</a>
+    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/teachers}" class="btn btn4">Teacher</a>
+    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/students}" class="btn btn4">Student</a>
+    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/users}" class="btn btn4">User</a>
 </div>
 
 </body>
 </html>
 
-
-<!--<!DOCTYPE html>-->
-<!--<html>-->
-<!--<head>-->
-<!--    <title>W3.CSS Template</title>-->
-
-<!--    <meta charset="UTF-8">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1">-->
-<!--    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">-->
-<!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">-->
-<!--    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">-->
-<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">-->
-<!--    <style>-->
-<!--        .w3-sidebar a {font-family: "Roboto", sans-serif}-->
-<!--        body,h1,h2,h3,h4,h5,h6,.w3-wide {font-family: "Montserrat", sans-serif;}-->
-<!--    </style>-->
-<!--</head>-->
-<!--<body class="w3-content" style="max-width:1200px">-->
-
-<!--<nav class="w3-sidebar w3-bar-block w3-white w3-collapse w3-top" style="z-index:3;width:250px" id="mySidebar">-->
-<!--    <div class="w3-container w3-display-container w3-padding-16">-->
-<!--        <i onclick="w3_close()" class="fa fa-remove w3-hide-large w3-button w3-display-topright"></i>-->
-<!--        <h3 class="w3-wide"><b>PeaksoftLms</b></h3>-->
-<!--    </div>-->
-<!--    <div class="w3-padding-64 w3-large w3-text-grey" style="font-weight:bold">-->
-
-<!--        <a href="/companies" class="w3-bar-item w3-button">Company</a>-->
-<!--        <a href="/courses" class="w3-bar-item w3-button">Course</a>-->
-<!--        <a href="/groups" class="w3-bar-item w3-button">Group</a>-->
-<!--        <a href="/teachers" class="w3-bar-item w3-button">Teacher</a>-->
-<!--        <a href="/students" class="w3-bar-item w3-button">Student</a>-->
-<!--    </div>-->
-
-<!--</nav>-->
-
-<!--&lt;!&ndash; Top menu on small screens &ndash;&gt;-->
-<!--<header class="w3-bar w3-top w3-hide-large w3-black w3-xlarge">-->
-<!--    <div class="w3-bar-item w3-padding-24 w3-wide">LOGO</div>-->
-<!--    <a href="javascript:void(0)" class="w3-bar-item w3-button w3-padding-24 w3-right" onclick="w3_open()"><i class="fa fa-bars"></i></a>-->
-<!--</header>-->
-<!--</body>-->
-<!--</html>-->
 

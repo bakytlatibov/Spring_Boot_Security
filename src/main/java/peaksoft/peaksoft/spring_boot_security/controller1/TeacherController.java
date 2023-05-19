@@ -11,6 +11,7 @@ import peaksoft.peaksoft.spring_boot_security.service.CourseService;
 import peaksoft.peaksoft.spring_boot_security.service.StudentService;
 import peaksoft.peaksoft.spring_boot_security.service.TeacherService;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -23,8 +24,14 @@ public class TeacherController {
 
     @ModelAttribute("courses")
     public List<Course> getCourses() {
-        return courseService.getAllCourse();
+        List<Course> courses = new ArrayList<>();
+        for (Course course : courseService.getAllCourse()) {
+            if (course.getTeacher() == null){
+                courses.add(course);
+            }
 
+        }
+        return courses;
     }
 
     @GetMapping()
@@ -41,8 +48,8 @@ public class TeacherController {
         return "teacher/addTeacher";
     }
 
-    @PostMapping("/saveTeacher")
-    public String saveTeacher(@ModelAttribute("teacher") Teacher teacher) {
+    @PostMapping("saveTeacher")
+    public String saveTeacher(@ModelAttribute("teacher") Teacher teacher) throws Exception {
         teacherService.addTeacher(teacher.getCourseId(), teacher);
         return "redirect:/teachers";
     }
@@ -56,15 +63,14 @@ public class TeacherController {
     }
 
     @RequestMapping(value = "{id}",method = {RequestMethod.PATCH,RequestMethod.GET})
-    public String saveUpdateTeacher(@PathVariable("id") Long id, @ModelAttribute("teacher") Teacher teacher) {
+    public String saveUpdateTeacher(@PathVariable("id") Long id, @ModelAttribute("teachers") Teacher teacher) {
         teacherService.updateTeacher(id, teacher.getCourseId(), teacher);
         return "redirect:/teachers";
     }
 
     @RequestMapping(value = "/delete/{id}",method = {RequestMethod.DELETE,RequestMethod.GET})
     public String deleteTeacher(@PathVariable("id") Long id) {
-        Teacher teacher = teacherService.getTeacherById(id);
-        teacherService.deleteTeacher(teacher);
+        teacherService.deleteTeacher(id);
         return "redirect:/teachers";
     }
 

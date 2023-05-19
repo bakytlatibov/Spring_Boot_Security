@@ -1,7 +1,5 @@
 package peaksoft.peaksoft.spring_boot_security.service;
 
-import lombok.AllArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import peaksoft.peaksoft.spring_boot_security.entities.Group;
@@ -13,15 +11,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class StudentService {
 
-    @Autowired
-    private StudentRepository studentRepository;
-    @Autowired
-    private GroupRepository groupRepository;
+    private final StudentRepository studentRepository;
 
-  public   List<Student> getAllStudents(){
+    private final GroupRepository groupRepository;
+    @Autowired
+    public StudentService(StudentRepository studentRepository, GroupRepository groupRepository) {
+        this.studentRepository = studentRepository;
+        this.groupRepository = groupRepository;
+    }
+
+    public   List<Student> getAllStudents(){
       return   studentRepository.findAll();
     }
 
@@ -53,16 +54,15 @@ public class StudentService {
         studentRepository.delete(student);
     }
 
-
     public List<Student> getStudentByCompany(Long companyId){
-       return studentRepository.getStudentByCompany(companyId);
+      return studentRepository.getStudentByCompany(companyId);
     }
   public   List<Student>getStudentByName(String name){
-      return null;
-
+      return studentRepository.getStudentByName(name);
   }
+
  public    List<Student>getStudentsByTeacher(Long teacherId){
-      return null;
+      return studentRepository.getStudentsByTeacher(teacherId);
  }
 
 }

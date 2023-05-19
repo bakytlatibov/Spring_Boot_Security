@@ -61,8 +61,7 @@ public class GroupController {
 
     }
 
-    @RequestMapping(value = "/saveGroup", method = {RequestMethod.PATCH, RequestMethod.GET})
-
+    @RequestMapping(value = "/{id}", method = {RequestMethod.PATCH, RequestMethod.GET})
     public String saveUpdateGroup(@PathVariable("id") Long id, @ModelAttribute("groups") Group group) {
         groupService.updateGroup(id, group.getCourseId(), group);
         return "redirect:/groups";
@@ -71,22 +70,37 @@ public class GroupController {
 
     @RequestMapping(value = "/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
     public String deleteGroup(@PathVariable("id") Long id) {
+        System.out.println("ID: " + id);
         Group group = groupService.getGroupById(id);
         groupService.deleteGroup(group);
+        System.out.println("ID:: " + id);
         return "redirect:/groups";
 
     }
 
-    @GetMapping("/search")
-    public String getStudentName(Model model, String name) {
-        List<Student> students = studentService.getStudentByName(name);
-        List<Student> studentList = studentService.getAllStudents();
-        if (name != null) {
-            model.addAttribute("students", students);
-        } else {
-            model.addAttribute("students", studentList);
-        }
-        return "groups/getStudent";
+    @GetMapping("/students/{teacherId}")
+    public String getStudentByCompanyId(@PathVariable("teacherId") Long teacherId, Model model) {
+        List<Student> studentList = studentService.getStudentByCompany(teacherId);
+        model.addAttribute("studentList", studentList);
+        model.addAttribute("count", studentList.size());
+        return "teacher/students";
+
     }
+        @GetMapping("/search")
+        public String getStudentName(Model model, String name){
+            List<Student> students = studentService.getStudentByName(name);
+            List<Student> studentList = studentService.getAllStudents();
+            if(name != null){
+                model.addAttribute("students", students);
+            }
+            else{
+                model.addAttribute("students", studentList);
+            }
+            return "groups/getStudent";
+    }
+//    public List<Student> getStudentByName(String name) {
+//        List<Student> students = studentService.getStudentByName(name).stream().toList;
+//        return students;
+//    }
 }
 

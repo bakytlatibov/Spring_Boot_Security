@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en"xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
 <link rel="stylesheet" href="./style.css">
 
 
@@ -7,7 +8,7 @@
     body {
         height: 100vh;
         background-color: #4158D0;
-        background-image: linear-gradient(43deg, #4158D0 0%, #C850C0 46%, #FFCC70 100%);
+        background-image: linear-gradient(43deg, #124b4b 0%, #183636 46%, #122626 100%);
     }
 
     table {
@@ -94,6 +95,102 @@
         text-align: center;
     }
 
+
+
+    .custom-btn {
+        width: 130px;
+        height: 40px;
+        color: #fff;
+        border-radius: 5px;
+        padding: 10px 25px;
+        font-family: 'Lato', sans-serif;
+        font-weight: 500;
+        background: transparent;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        position: relative;
+        display: inline-block;
+        box-shadow:inset 2px 2px 2px 0px rgba(255,255,255,.5),
+        7px 7px 20px 0px rgba(0,0,0,.1),
+        4px 4px 5px 0px rgba(0,0,0,.1);
+        outline: none;
+    }
+    /* 3 */
+    .btn-3 {
+        background: rgb(0,172,238);
+        background: linear-gradient(0deg, rgba(0,172,238,1) 0%, rgba(2,126,251,1) 100%);
+        width: 130px;
+        height: 40px;
+        line-height: 42px;
+        padding: 0;
+        border: none;
+
+    }
+    .btn-3 span {
+        position: relative;
+        display: block;
+        width: 100%;
+        height: 100%;
+    }
+    .btn-3:before,
+    .btn-3:after {
+        position: absolute;
+        content: "";
+        right: 0;
+        top: 0;
+        background: rgba(2,126,251,1);
+        transition: all 0.3s ease;
+    }
+    .btn-3:before {
+        height: 0%;
+        width: 2px;
+    }
+    .btn-3:after {
+        width: 0%;
+        height: 2px;
+    }
+    .btn-3:hover{
+        background: transparent;
+        box-shadow: none;
+    }
+    .btn-3:hover:before {
+        height: 100%;
+    }
+    .btn-3:hover:after {
+        width: 100%;
+    }
+    .btn-3 span:hover{
+        color: rgba(2,126,251,1);
+    }
+    .btn-3 span:before,
+    .btn-3 span:after {
+        position: absolute;
+        content: "";
+        left: 0;
+        bottom: 0;
+        background: rgba(2,126,251,1);
+        transition: all 0.3s ease;
+    }
+    .btn-3 span:before {
+        width: 2px;
+        height: 0%;
+    }
+    .btn-3 span:after {
+        width: 0%;
+        height: 2px;
+    }
+    .btn-3 span:hover:before {
+        height: 100%;
+    }
+    .btn-3 span:hover:after {
+        width: 100%;
+    }
+
+    /* 4 */
+
+
+
+
 </style>
 <body>
 
@@ -103,8 +200,9 @@
         <td>Firs Name</td>
         <td>Email</td>
         <td>Last Name</td>
+        <td>students</td>
         <td>update</td>
-        <td>delete</td>
+        <td sec:authorize="hasAuthority('ADMIN')">delete</td>
     </tr>
     <tr>
     <tr th:each="teacher:${teachers}">
@@ -112,21 +210,29 @@
         <th th:text="${teacher.firstName}"></th>
         <th th:text="${teacher.lastName}"></th>
         <th th:text="${teacher.email}"></th>
+    <td>
+        <a th:href="@{/teachers/students/{teacherId}(teacherId=${teacher.id})}">
+            <button type="submit" style="height:auto; background-color: deepskyblue">students</button>
+        </a>
+    </td>
         <td>
             <a th:href="@{/teachers/update/{id}(id=${teacher.id})}">
-                <button style="height:auto; background-color: #8b8900">update</button>
+                <button style="height:auto; background-color: bisque">update</button>
             </a>
         </td>
         <td>
-            <form th:method="Get" th:action="@{/teachers/delete/{id}(id=${teacher.id})}">
-                <button type="submit" style="height:auto; background-color: #82008b">delete</button>
+            <form sec:authorize="hasAuthority('ADMIN')" th:method="Get" th:action="@{/teachers/delete/{id}(id=${teacher.id})}">
+                <button type="submit" style="height:auto; background-color:red;">delete</button>
             </form>
         </td>
     </tr>
 </table>
-<form>
-    <input style=" display: block; margin:auto; font-size:15px;" class="b1" type="button" value="Add Teacher"
-           onclick="window.location.href = 'teachers/addTeacher'">
-</form>
+<button  style="margin: auto;display: block" class="custom-btn btn-3"
+         value="Add Teacher" onclick="window.location.href = 'teachers/addTeacher'">  <span>Add Teacher</span></button>
+<br>
+
+<button  style="margin: auto;display: block" class="custom-btn btn-3"
+         value="Home" onclick="window.location.href = '/'">  <span>Home</span></button>
+
 </body>
 </html>

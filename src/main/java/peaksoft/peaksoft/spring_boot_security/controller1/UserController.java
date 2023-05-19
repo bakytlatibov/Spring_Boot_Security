@@ -5,47 +5,55 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import peaksoft.peaksoft.spring_boot_security.entity.User;
+import peaksoft.peaksoft.spring_boot_security.entities.User;
 import peaksoft.peaksoft.spring_boot_security.repository.UserRepository;
+import peaksoft.peaksoft.spring_boot_security.service.UserService;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/users")
 @RequiredArgsConstructor
 public class UserController {
-    private final UserRepository userRepository;
-    @GetMapping("/users")
-    public String getAllUsers(Model model){
-        List<User> users = userRepository.findAll();
+    private final UserService userService;
+
+    @GetMapping()
+    public String getAllUsers(Model model) {
+        List<User> users = userService.getAllUsers();
         model.addAttribute("users", users);
         return "user/users";
     }
+
     @GetMapping("/addUser")
-    public String addUser(Model model){
-        model.addAttribute("user",new User());
+    public String addUser(Model model) {
+        model.addAttribute("user", new User());
         return "user/addUser";
     }
+
     @PostMapping("/saveUser")
-    public String saveUser(@ModelAttribute("user")User user){
-        userRepository.save(user);
-        return "redirect:/user/users";
+    public String saveUser(@ModelAttribute("user") User user) {
+        System.out.println("User password: " + user.getPassword());
+        userService.addUser(user);
+        return "redirect:/users";
     }
+
     @GetMapping("/userUpdate/{id}")
-    public String updateUser(@PathVariable("id")Long id,Model model){
-        User user = userRepository.getById(id);
-        model.addAttribute("updateUser",user);
+    public String updateUser(@PathVariable("id") Long id, Model model) {
+        User user = userService.getUserById(id);
+        model.addAttribute("updateUser", user);
         return "user/updateUser";
     }
-    @PatchMapping("/{id}")
-    public String saveUserUpdate(@PathVariable("id")Long id,@ModelAttribute("updateUser")User user){
-      userRepository.save(user);
-        return "redirect:/user/users";
+
+    @RequestMapping(value = "{id}", method = {RequestMethod.PATCH, RequestMethod.GET})
+    public String saveUserUpdate(@PathVariable("id") Long id, @ModelAttribute("updateUser") User user) {
+        userService.updateUser(id, user,user.getRoleName());
+        return "redirect:/users";
     }
-    @PostMapping("/delete/{id}")
-    public String deleteUser(@PathVariable("id")Long id){
-        User user = userRepository.getById(id);
-        userRepository.delete(user);
-        return "redirect:/user/users";
+
+    @RequestMapping(value = "/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
+    public String deleteUser(@PathVariable("id") Long id) {
+        User user = userService.getUserById(id);
+        userService.deleteUser(user);
+        return "redirect:/users";
     }
 }

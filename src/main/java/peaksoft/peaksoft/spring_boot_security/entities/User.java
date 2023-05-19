@@ -1,14 +1,11 @@
-package peaksoft.peaksoft.spring_boot_security.entity;
+package peaksoft.peaksoft.spring_boot_security.entities;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,14 +21,17 @@ public class User {
     private Long id;
     private String email;
     private String password;
+    @Column(name ="user_name")
     private String username;
+    @Column(name ="last_name")
     private String lastName;
     private int age;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER,cascade = {CascadeType.REFRESH,CascadeType.MERGE,CascadeType.PERSIST})
     @JoinTable(name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
-
+@Transient
+    private String roleName;
 }

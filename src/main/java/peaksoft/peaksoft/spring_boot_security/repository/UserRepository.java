@@ -1,6 +1,6 @@
 package peaksoft.peaksoft.spring_boot_security.repository;
 
-import peaksoft.peaksoft.spring_boot_security.entity.User;
+import peaksoft.peaksoft.spring_boot_security.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

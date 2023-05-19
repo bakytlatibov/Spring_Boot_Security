@@ -45,10 +45,7 @@ public class CourseController {
 
     public String saveCourse(@ModelAttribute("course") Course course) {
         courseService.addCourse(course.getCompanyId(), course);
-
         return "redirect:/courses";
-
-
     }
 
     @GetMapping("/update/{id}")
@@ -58,13 +55,13 @@ public class CourseController {
         return "courses/updateCourse";
     }
 
-    @RequestMapping(value = "{id}",method = {RequestMethod.PATCH,RequestMethod.GET})
+    @RequestMapping(value = "{id}", method = {RequestMethod.PATCH, RequestMethod.GET})
     public String saveUpdateCourse(@PathVariable("id") Long id, @ModelAttribute("course") Course course) {
         courseService.updateCourse(course.getCompanyId(), id, course);
         return "redirect:/courses";
     }
 
-    @RequestMapping(value = "/delete/{id}",method = {RequestMethod.DELETE,RequestMethod.GET})
+    @RequestMapping(value = "/delete/{id}", method = {RequestMethod.DELETE, RequestMethod.GET})
     public String deleteCourse(@PathVariable("id") Long id) {
         Course course1 = courseService.getCurseById(id);
         courseService.deleteCourse(course1);

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -218,6 +219,16 @@
     .btn4:hover::before {
         height: 380%;
     }
+    select {
+        height: 45px;
+        width: 100%;
+        padding: 16px 20px;
+        border-radius: 4px;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        margin: 8px 0;
+    }
 
 </style>
 <body>
@@ -229,7 +240,7 @@
         <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
         <div class="form__group">
             <input type="text" class="form__input" th:field="*{courseName}" id="courseName" placeholder="course name"
-                   required=""/>-->
+                   required=""/>
             <label for="courseName" class="form__label"> Course Name</label>
             <br>
             <br>
@@ -249,112 +260,20 @@
                 <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 
                 <div class="middle">
-                    <a href="/companies" class="btn btn1">Company</a>
-                    <a href="/courses" class="btn btn2">Course</a>
-                    <a href="/groups" class="btn btn3">Group</a>
-                    <a href="/teachers" class="btn btn4">Teacher</a>
-                    <a href="/students" class="btn btn4">Student</a>
-                    <a href="/" class="btn btn4">Home</a>
-
-
+                    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/companies}" class="btn btn1">Company</a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/courses}" class="btn btn2">Course</a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/groups}" class="btn btn3">Group</a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/teachers}" class="btn btn4">Teacher</a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/students}" class="btn btn4">Student</a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/users}" class="btn btn4">User</a>
                 </div>
             </div>
         </div>
 
-
-        <!--        <input th:text type="text" th:field="*{companyName}" placeholder="company name">-->
-        <!--        <br>-->
-        <!--        <br>-->
-        <!--        <input th:text type="text" th:field="*{locatedCountry}" placeholder="located country">-->
-        <!--        <br>-->
-        <!--        <br>-->
     </form>
-</div>
 </div>
 
 
 </body>
 </html>
 
-<!--<body>-->
-
-<!--<div style="text-align: center;margin-top: 200px;font-size:30px; ">-->
-<!--  <form th:action="@{saveCourse}"-->
-<!--        th:method="post"-->
-<!--        th:object="${course}">-->
-<!--    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">-->
-<!--    <div class="form__group">-->
-<!--      <input type="text" class="form__input" th:field="*{courseName}" id="courseName"  placeholder="course name" required="" />-->
-<!--      <label for="courseName" class="form__label"> Course Name</label>-->
-<!--      <br>-->
-<!--      <br>-->
-<!--      <input type="text" class="form__input" th:field="*{durationMonth}" id="durationMonth"  placeholder="duration month" required="" />-->
-<!--      <label for="durationMonth" class="form__label">Duration Month</label>-->
-<!--      <br>-->
-<!--      <br>-->
-
-<!--      <div class="wrap">-->
-<!--        <button class="button">add Course</button>-->
-<!--        <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>-->
-
-<!--        <div class="middle">-->
-<!--          <a href="/companies" class="btn btn1">Company</a>-->
-<!--          <a href="/courses" class="btn btn2">Course</a>-->
-<!--          <a href="/groups" class="btn btn3">Group</a>-->
-<!--          <a href="/teachers" class="btn btn4">Teacher</a>-->
-<!--          <a href="/students" class="btn btn4">Student</a>-->
-<!--          <a href="/" class="btn btn4">Home</a>-->
-
-
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
-
-
-<!--    &lt;!&ndash;        <input th:text type="text" th:field="*{companyName}" placeholder="company name">&ndash;&gt;-->
-<!--    &lt;!&ndash;        <br>&ndash;&gt;-->
-<!--    &lt;!&ndash;        <br>&ndash;&gt;-->
-<!--    &lt;!&ndash;        <input th:text type="text" th:field="*{locatedCountry}" placeholder="located country">&ndash;&gt;-->
-<!--    &lt;!&ndash;        <br>&ndash;&gt;-->
-<!--    &lt;!&ndash;        <br>&ndash;&gt;-->
-<!--  </form>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
-
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-
-<!--</head>-->
-
-<!--<body>-->
-
-<!--<div style="text-align: center;margin-top: 200px;font-size:30px; ">-->
-<!--  <form th:action="@{saveCourse}"-->
-<!--        th:method="post"-->
-<!--        th:object="${course}">-->
-
-<!--    <input th:text="text" th:field="*{courseName}" placeholder="course name">-->
-<!--    <br>-->
-<!--    <br>-->
-<!--    <input th:text="text" th:field="*{durationMonth}" placeholder="duration month">-->
-<!--    <br>-->
-<!--    <br>-->
-<!--    <select th:field="*{companyId}">-->
-<!--      <option th:each="company:${companyList}"-->
-<!--      th:value="${company.id}"-->
-<!--      th:text="${company.companyName}">-->
-
-
-<!--      </option>-->
-<!--    </select>-->
-
-<!--    <input type="submit" value="add Course">-->
-<!--  </form></div>-->
-
-<!--</body>-->
-<!--</html>-->

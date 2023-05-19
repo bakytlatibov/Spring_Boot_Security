@@ -40,20 +40,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-             .csrf()
+        http.csrf()
                 .disable()
                 .authorizeRequests()
 //                .antMatchers("/").hasAuthority("ADMIN")
-                .antMatchers("/main").hasAuthority("ADMIN")
+                .antMatchers("/").hasAnyAuthority("ADMIN","INSTRUCTOR","STUDENT")
                 .antMatchers("/companies/**").hasAuthority("ADMIN")
-                .antMatchers("/courses**").hasAuthority("ADMIN")
+                .antMatchers("/courses/**").hasAnyAuthority("ADMIN","INSTRUCTOR")
+                .antMatchers("/groups/**").hasAnyAuthority("ADMIN","INSTRUCTOR")
+                .antMatchers("/students/**").hasAnyAuthority("ADMIN","INSTRUCTOR")
+                .antMatchers("/teachers/**").hasAnyAuthority("ADMIN","INSTRUCTOR")
+                .antMatchers("/profile/**").hasAnyAuthority("ADMIN","INSTRUCTOR","STUDENT")
                 .anyRequest().authenticated()
                 .and()
-                .formLogin().permitAll()
-//                .loginPage("/login")
-                .and()
-                .logout().permitAll();
+                .formLogin().loginPage("/login")
+                .permitAll();
 
     }
 

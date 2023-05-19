@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import peaksoft.peaksoft.spring_boot_security.entities.Course;
 import peaksoft.peaksoft.spring_boot_security.entities.Group;
+import peaksoft.peaksoft.spring_boot_security.entities.Student;
 import peaksoft.peaksoft.spring_boot_security.repository.CourseRepository;
 import peaksoft.peaksoft.spring_boot_security.repository.GroupRepository;
 
@@ -15,17 +16,27 @@ import java.util.List;
 @RequiredArgsConstructor
 
 public class GroupService {
-    @Autowired
+
     private final GroupRepository groupRepository;
-    @Autowired
+
     private final CourseRepository courseRepository;
+
     public List<Group> getAllGroups() {
         return groupRepository.findAll();
     }
-    public void addGroup(Long groupId, Group group) {
+
+    public void addGroup(Long courseId, Group group) {
+        Course course = courseRepository.findById(courseId).get();
+        List<Course> courses = new ArrayList<>();
+        courses.add(course);
+        List<Group> groups = new ArrayList<>();
+        groups.add(group);
+        course.setGroups(groups);
+        group.setCourses(courses);
         groupRepository.save(group);
 
     }
+
     public Group getGroupById(Long id) {
         return groupRepository.findById(id).get();
     }
@@ -49,6 +60,9 @@ public class GroupService {
         groupRepository.delete(group);
 
 
+    }
+    public List<Student> getStudentByName(String name){
+        return groupRepository.getStudentByName(name);
     }
 
 }

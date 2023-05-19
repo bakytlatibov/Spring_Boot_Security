@@ -20,7 +20,7 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 
     private Long id;
-    @Column(name = "company_name")
+    @Column(name = "company_name",unique = true)
     private String companyName;
     @Column(name = "located_country")
     private String locatedCountry;

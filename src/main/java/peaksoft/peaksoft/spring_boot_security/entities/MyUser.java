@@ -1,4 +1,4 @@
-package peaksoft.peaksoft.spring_boot_security.entity;
+package peaksoft.peaksoft.spring_boot_security.entities;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

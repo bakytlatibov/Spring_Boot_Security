@@ -21,15 +21,14 @@ public class Course {
     private String courseName;
     @Column(name = "duration_month")
     private String durationMonth;
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE,CascadeType.PERSIST,CascadeType.DETACH})
     @JoinColumn(name = "company_id")
     private Company company;
     @Transient
     private Long companyId;
-    @ManyToMany(cascade = CascadeType.ALL,mappedBy = "courses")
-
-    List<Group> groups;
-    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL, mappedBy = "course")
+@ManyToMany(cascade = {CascadeType.ALL}, mappedBy = "courses")
+   private List<Group> groups;
+    @OneToOne(fetch = FetchType.LAZY,cascade = CascadeType.ALL,mappedBy = "course")
     private Teacher teacher;
 
 

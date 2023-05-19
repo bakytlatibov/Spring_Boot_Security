@@ -26,19 +26,15 @@ public class Group {
     @Column(name = "date_of_finish")
     private String dateOfFinish;
 
-    //    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
-//    @JoinColumn(name = "course_id")
-//    private Course course;
     @Transient
     private Long courseId;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "groups_courses",
-            joinColumns = @JoinColumn(name = "groups_id"),
-            inverseJoinColumns = @JoinColumn(name = "courses_id"))
+@ManyToMany(cascade = {CascadeType.MERGE, CascadeType.REFRESH,CascadeType.DETACH,CascadeType.PERSIST})
+@JoinTable(name = "groups_courses",
+        joinColumns = @JoinColumn(name = "groups_id"),
+        inverseJoinColumns = @JoinColumn(name = "courses_id"))
     private List<Course> courses;
 
-
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "group")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "group")
     private List<Student> students;
 
 }

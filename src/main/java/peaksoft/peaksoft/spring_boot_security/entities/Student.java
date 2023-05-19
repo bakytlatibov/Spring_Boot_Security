@@ -26,9 +26,10 @@ public class Student {
     private String lastName;
     private String email;
     @Column(name = "study_format")
-    @Enumerated
+    @Enumerated(EnumType.STRING)
     private StudyFormation studyFormation;
-    @ManyToOne(cascade = {CascadeType.ALL,CascadeType.PERSIST,CascadeType.REFRESH})
+
+    @ManyToOne(cascade = {CascadeType.MERGE,CascadeType.REFRESH,CascadeType.DETACH,CascadeType.PERSIST})
     @JoinColumn(name = "group_id")
     private Group group;
     @Transient

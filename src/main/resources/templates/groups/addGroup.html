@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -218,6 +219,16 @@
     .btn4:hover::before {
         height: 380%;
     }
+    select {
+        height: 45px;
+        width: 100%;
+        padding: 16px 20px;
+        border-radius: 4px;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        margin: 8px 0;
+    }
 
 </style>
 
@@ -253,67 +264,21 @@
             <div class="wrap">
                 <button class="button">add Group</button>
                 <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
-
                 <div class="middle">
-                    <a href="/companies" class="btn btn1">Company</a>
-                    <a href="/courses" class="btn btn2">Course</a>
-                    <a href="/groups" class="btn btn3">Group</a>
-                    <a href="/teachers" class="btn btn4">Teacher</a>
-                    <a href="/students" class="btn btn4">Student</a>
-                    <a href="/" class="btn btn4">Home</a>
-
-
+                    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/companies}" class="btn btn1">Company</a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/courses}" class="btn btn2">Course</a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/groups}" class="btn btn3">Group</a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/teachers}" class="btn btn4">Teacher</a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/students}" class="btn btn4">Student</a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/users}" class="btn btn4">User</a>
                 </div>
             </div>
         </div>
 
-
-        <!--        <input th:text type="text" th:field="*{companyName}" placeholder="company name">-->
-        <!--        <br>-->
-        <!--        <br>-->
-        <!--        <input th:text type="text" th:field="*{locatedCountry}" placeholder="located country">-->
-        <!--        <br>-->
-        <!--        <br>-->
     </form>
-</div>
 </div>
 
 
 </body>
 </html>
 
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div style="text-align: center;margin-top: 200px;font-size:30px; ">-->
-<!--    <form th:action="@{/groups/saveGroup}"-->
-<!--          th:method="post"-->
-<!--          th:object="${group}">-->
-
-<!--        <input th:text="text" th:field="*{groupName}" placeholder="group name">-->
-<!--        <br>-->
-<!--        <br>-->
-<!--        <input th:text="text" th:field="*{dateOfStart}" placeholder="date of start">-->
-
-<!--        <br>-->
-<!--        <input th:text="text" th:field="*{dateOfFinish}" placeholder="date of finish">-->
-<!--        <br>-->
-<!--        <br>-->
-<!--        <select th:field="*{courseId}">-->
-<!--            <option th:each="course:${courseList}"-->
-<!--                    th:value="${course.id}"-->
-<!--                    th:text="${course.courseName}">-->
-<!--            </option>-->
-<!--        </select>-->
-
-<!--        <input type="submit" value="add Group">-->
-<!--    </form></div>-->
-
-
-<!--</body>-->
-<!--</html>-->

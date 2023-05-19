@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5"
+      xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -219,6 +220,18 @@
         height: 380%;
     }
 
+    select {
+        height: 45px;
+        width: 100%;
+        padding: 16px 20px;
+        border-radius: 4px;
+        background-color: #ffffff;
+        border: 1px solid #ccc;
+        box-sizing: border-box;
+        margin: 8px 0;
+    }
+
+
 </style>
 
 <body>
@@ -244,6 +257,13 @@
                    placeholder="email" required=""/>
             <label for="email" class="form__label">Email</label>
             <br>
+            <select th:field="*{courseId}">-->
+                <option th:each="course:${courses}"
+                        th:value="${course.id}"
+                        th:text="${course.courseName}">
+                </option>
+            </select>
+
             <br>
 
             <div class="wrap">
@@ -251,14 +271,12 @@
                 <link href='https://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
 
                 <div class="middle">
-                    <a href="/companies" class="btn btn1">Company</a>
-                    <a href="/courses" class="btn btn2">Course</a>
-                    <a href="/groups" class="btn btn3">Group</a>
-                    <a href="/teachers" class="btn btn4">Teacher</a>
-                    <a href="/students" class="btn btn4">Student</a>
-                    <a href="/" class="btn btn4">Home</a>
-
-
+                    <a sec:authorize="hasAuthority('ADMIN')" th:href="@{/companies}" class="btn btn1">Company</a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/courses}" class="btn btn2">Course</a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/groups}" class="btn btn3">Group</a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/teachers}" class="btn btn4">Teacher</a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/students}" class="btn btn4">Student</a>
+                    <a sec:authorize="hasAnyAuthority('ADMIN','INSTRUCTOR')" th:href="@{/users}" class="btn btn4">User</a>
                 </div>
             </div>
         </div>
@@ -266,42 +284,9 @@
 
     </form>
 </div>
-</div>
+
 
 
 </body>
 </html>
 
-
-<!--<!DOCTYPE html>-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>Title</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div style="text-align: center">-->
-<!--    <form th:action="@{/teachers/{id}(id=${updateTeacher.id})}"-->
-<!--          th:method="Get"-->
-<!--          th:object="${updateTeacher}">-->
-
-<!--        <input th:text="text" th:field="*{firstName}" placeholder="Firs name">-->
-<!--        <br>-->
-<!--        <br><input th:text="text" th:field="*{lastName}" placeholder="Last name">-->
-<!--        <br>-->
-<!--        <br>-->
-<!--        <input th:text="text" th:field="*{email}" placeholder="Email">-->
-<!--        <br>-->
-<!--        <br>-->
-<!--        <select th:field="*{courseId}">-->
-<!--            <option th:each="course:${courses}"-->
-<!--                    th:value="${course.id}"-->
-<!--                    th:text="${course.courseName}">-->
-<!--            </option>-->
-<!--        </select>-->
-<!--        <input type="submit" value="update">-->
-<!--    </form>-->
-<!--</div>-->
-
-<!--</body>-->
-<!--</html>-->
