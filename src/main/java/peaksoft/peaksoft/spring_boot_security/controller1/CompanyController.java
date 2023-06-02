@@ -20,7 +20,6 @@ public class CompanyController {
     private final CompanyService companyService;
     private final CompanyRepository companyRepository;
 
-
     @GetMapping
     public String getAllCompanies(Model model) {
         List<Company> companies = companyService.getAllCompanies();

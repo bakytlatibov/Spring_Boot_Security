@@ -52,16 +52,13 @@ public class TeacherService {
         Teacher teacher = teacherRepository.findById(id).get();
         teacher.setCourse(null);
         teacherRepository.delete(teacher);
-        delete(teacher);
+
 //        if (teacher.getCourse() == null){
 //            teacherRepository.delete(teacher);
 //        }
 //        teacher.setCourse(null);
 //        teacherRepository.delete(teacher);
-    }
 
-    public void delete(Teacher teacher) {
-        teacherRepository.delete(teacher);
     }
 
 
